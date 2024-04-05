@@ -1,21 +1,18 @@
-# Video Analytics with YOLO
+# Video Analytics with YOLOv8
 
-This project focuses on utilizing the YOLO (You Only Look Once) object detection algorithm for video analytics. YOLO is a state-of-the-art, real-time object detection system that can detect multiple objects within images and videos swiftly and accurately.
+This project focuses on utilizing the YOLO (You Only Look Once) object detection algorithm for video analytics. YOLO is 
+a state-of-the-art, real-time object detection system that can detect multiple objects within images 
+and videos swiftly and accurately.
 
 ## Overview
 
-This project leverages Python along with the YOLO algorithm to analyze videos, detect objects within them, and perform various analytics tasks. It provides functionalities such as:
-
-- Object detection within video streams.
-- Tracking of objects across frames.
-- Counting and logging of detected objects.
-- Integration with other analytics systems.
-- Customizable configuration options for different use cases.
+This project leverages Python along with the YOLO algorithm to analyze videos, detect objects within them, 
+and perform various analytics tasks. It provides functionalities such as Accident (implemented), Fire and Violence 
+detection within video streams and saves the frames to a database (locally in the backend server as of now).
 
 ## Requirements
 
-- Python 3.x
-- YOLO (You Only Look Once) algorithm implementation
-- OpenCV (Open Source Computer Vision Library)
+- Python 3.10
+- YOLOv8 (You Only Look Once)from Ultralytics
 - Additional libraries as specified in the requirements.txt file
 
