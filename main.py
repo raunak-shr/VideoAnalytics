@@ -1,3 +1,4 @@
+# Change directory to this folder and run using python -m uvicorn main:app --reload --port 8001 --host 0.0.0.0
 import os
 import torch
 import shutil
@@ -9,7 +10,7 @@ from fastapi.exceptions import HTTPException
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from api.model import IpModel
+from model import IpModel
 
 MODEL = YOLO(r'YOLOmodel/best3.pt')
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -27,7 +28,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins="*",
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -94,8 +95,8 @@ def upload_video_and_process(data: IpModel) -> dict:
         source = save_paths['Video Path']
         video_info = sv.VideoInfo.from_video_path(source)
 
-        results = MODEL.predict(source, stream=True, save=False, show_conf=False,
-                                imgsz=(video_info.height, video_info.width))
+        results = MODEL.predict(source, stream=True, save=False)
+                                # imgsz=(video_info.height, video_info.width))
 
         inference_frames = []
         for frame in results:
@@ -106,22 +107,30 @@ def upload_video_and_process(data: IpModel) -> dict:
         for frame_idx in range(len(inference_frames)):
             window = inference_frames[frame_idx:frame_idx + 20]  # current window size of 20
             events = [x.probs.top1 for x in window]
-            json_list = []
+            timestamps = []
             acc_frame_percent = float(events.count(1) / len(events))
             if acc_frame_percent >= data.threshold:  # save the window if count of accidents (1)
                 for idx, frame in enumerate(window):  # in the window is above threshold
 
-                    timestamp = round(float(idx / frames_per_sec), 3)  # 0. Calculate Timestamp of frame
+                    timestamp = round(float(idx / frames_per_sec), 2)  # 0. Calculate Timestamp of frame
 
                     filename = f'{result_dir}/{timestamp} - Accident-{idx}.jpg'
 
                     frame.plot(save=True, filename=filename)  # 1. Save the frames
 
-                    json_list.append({'Timestamp': timestamp, 'Incident': 'Accident'})  # 2. Create JSON List
+                    timestamps.append(timestamp)  # 2. Add to timestamps
 
-                return {'Status': 1, 'OutputPath': result_dir, 'JSONList': json_list}  # 3. Return Results
+                return {'Status': 1,
+                        'OutputPath': result_dir,
+                        'Locality': 'Jaydev Vihar',
+                        'Landmark': 'MO Bus Stop',
+                        'Timestamp': timestamps[10]}  # 3. Return Results
             else:
-                return {'Status': -1, 'OutputPath': None, 'JSONList': json_list}
+                return {'Status': 'N/A',
+                        'OutputPath': 'N/A',
+                        'Locality': 'Jaydev Vihar',
+                        'Landmark': 'MO Bus Stop',
+                        'Timestamp': 'N/A'}
 
     except Exception as e:
         raise HTTPException(status_code=500, detail="Failed to process video", headers={"X-Error": f"{e}"})
