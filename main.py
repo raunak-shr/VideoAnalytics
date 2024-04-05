@@ -10,7 +10,7 @@ from fastapi.exceptions import HTTPException
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from model import IpModel
+from models.model import IpModel
 
 MODEL = YOLO(r'YOLOmodel/best3.pt')
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")

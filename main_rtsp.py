@@ -10,7 +10,7 @@ from ultralytics import YOLO
 from fastapi.exceptions import HTTPException
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
-from model import IpModel
+from models.model import IpModel
 
 
 MODEL = YOLO(r'YOLOmodel/best3.pt')
@@ -29,7 +29,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins="*",
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

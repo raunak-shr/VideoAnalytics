@@ -1,0 +1,2 @@
+rtsp://hail:Hail%401234@172.16.12.196:554/cam/realmonitor?channel=1&subtype=0&unicast=true&proto=Onvif
+rtsp://hail:Hail%401234@172.16.116.148:554/cam/realmonitor?channel=1&subtype=0&unicast=true&proto=Onvif
