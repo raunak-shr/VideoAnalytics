@@ -1,0 +1,652 @@
+2024-04-08 16:11:42,717 - Timestamp: 2024-04-08 16:11:41.778166
+WindowProbs:[ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.9718, 0.0282])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.9718)
+top5: [0, 1]
+top5conf: tensor([0.9718, 0.0282]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.6030, 0.3970])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.6030)
+top5: [0, 1]
+top5conf: tensor([0.6030, 0.3970]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.3913, 0.6087])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.6087)
+top5: [1, 0]
+top5conf: tensor([0.6087, 0.3913]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.2277, 0.7723])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.7723)
+top5: [1, 0]
+top5conf: tensor([0.7723, 0.2277]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.4810, 0.5190])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.5190)
+top5: [1, 0]
+top5conf: tensor([0.5190, 0.4810]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.4509, 0.5491])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.5491)
+top5: [1, 0]
+top5conf: tensor([0.5491, 0.4509]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.3824, 0.6176])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.6176)
+top5: [1, 0]
+top5conf: tensor([0.6176, 0.3824]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.2537, 0.7463])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.7463)
+top5: [1, 0]
+top5conf: tensor([0.7463, 0.2537]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.2300, 0.7700])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.7700)
+top5: [1, 0]
+top5conf: tensor([0.7700, 0.2300]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.5591, 0.4409])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.5591)
+top5: [0, 1]
+top5conf: tensor([0.5591, 0.4409]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.5552, 0.4448])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.5552)
+top5: [0, 1]
+top5conf: tensor([0.5552, 0.4448]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.5928, 0.4072])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.5928)
+top5: [0, 1]
+top5conf: tensor([0.5928, 0.4072]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.4993, 0.5007])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.5007)
+top5: [1, 0]
+top5conf: tensor([0.5007, 0.4993]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.3294, 0.6706])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.6706)
+top5: [1, 0]
+top5conf: tensor([0.6706, 0.3294]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.3801, 0.6199])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.6199)
+top5: [1, 0]
+top5conf: tensor([0.6199, 0.3801]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.4395, 0.5605])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.5605)
+top5: [1, 0]
+top5conf: tensor([0.5605, 0.4395]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.7028, 0.2972])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.7028)
+top5: [0, 1]
+top5conf: tensor([0.7028, 0.2972]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.5462, 0.4538])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.5462)
+top5: [0, 1]
+top5conf: tensor([0.5462, 0.4538]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.5595, 0.4405])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.5595)
+top5: [0, 1]
+top5conf: tensor([0.5595, 0.4405]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.3514, 0.6486])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.6486)
+top5: [1, 0]
+top5conf: tensor([0.6486, 0.3514])]
+
+2024-04-08 16:14:44,655 - Timestamp: 2024-04-08 16:14:44.039236
+WindowProbs:[ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.9419, 0.0581])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.9419)
+top5: [0, 1]
+top5conf: tensor([0.9419, 0.0581]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.8856, 0.1144])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.8856)
+top5: [0, 1]
+top5conf: tensor([0.8856, 0.1144]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.7002, 0.2998])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.7002)
+top5: [0, 1]
+top5conf: tensor([0.7002, 0.2998]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.9705, 0.0295])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.9705)
+top5: [0, 1]
+top5conf: tensor([0.9705, 0.0295]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.6695, 0.3305])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.6695)
+top5: [0, 1]
+top5conf: tensor([0.6695, 0.3305]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.9920, 0.0080])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.9920)
+top5: [0, 1]
+top5conf: tensor([0.9920, 0.0080]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.9508, 0.0492])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.9508)
+top5: [0, 1]
+top5conf: tensor([0.9508, 0.0492]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.1650, 0.8350])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.8350)
+top5: [1, 0]
+top5conf: tensor([0.8350, 0.1650]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.2115, 0.7885])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.7885)
+top5: [1, 0]
+top5conf: tensor([0.7885, 0.2115]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.0352, 0.9648])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.9648)
+top5: [1, 0]
+top5conf: tensor([0.9648, 0.0352]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.0809, 0.9191])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.9191)
+top5: [1, 0]
+top5conf: tensor([0.9191, 0.0809]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.0104, 0.9896])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.9896)
+top5: [1, 0]
+top5conf: tensor([0.9896, 0.0104]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.0084, 0.9916])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.9916)
+top5: [1, 0]
+top5conf: tensor([0.9916, 0.0084]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.1444, 0.8556])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.8556)
+top5: [1, 0]
+top5conf: tensor([0.8556, 0.1444]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.0149, 0.9851])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.9851)
+top5: [1, 0]
+top5conf: tensor([0.9851, 0.0149]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.6431, 0.3569])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.6431)
+top5: [0, 1]
+top5conf: tensor([0.6431, 0.3569]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.2661, 0.7339])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.7339)
+top5: [1, 0]
+top5conf: tensor([0.7339, 0.2661]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.4183, 0.5817])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.5817)
+top5: [1, 0]
+top5conf: tensor([0.5817, 0.4183]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.1896, 0.8104])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.8104)
+top5: [1, 0]
+top5conf: tensor([0.8104, 0.1896]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.0015, 0.9985])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.9985)
+top5: [1, 0]
+top5conf: tensor([0.9985, 0.0015])]
+
+2024-04-08 16:17:21,484 - Timestamp: 2024-04-08 16:17:20.408410
+WindowProbs:[ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.9985, 0.0015])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.9985)
+top5: [0, 1]
+top5conf: tensor([0.9985, 0.0015]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.9933, 0.0067])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.9933)
+top5: [0, 1]
+top5conf: tensor([0.9933, 0.0067]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.8774, 0.1226])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.8774)
+top5: [0, 1]
+top5conf: tensor([0.8774, 0.1226]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.5661, 0.4339])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.5661)
+top5: [0, 1]
+top5conf: tensor([0.5661, 0.4339]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.4228, 0.5772])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.5772)
+top5: [1, 0]
+top5conf: tensor([0.5772, 0.4228]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.7501, 0.2499])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.7501)
+top5: [0, 1]
+top5conf: tensor([0.7501, 0.2499]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.8808, 0.1192])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.8808)
+top5: [0, 1]
+top5conf: tensor([0.8808, 0.1192]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.6293, 0.3707])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.6293)
+top5: [0, 1]
+top5conf: tensor([0.6293, 0.3707]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.0852, 0.9148])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.9148)
+top5: [1, 0]
+top5conf: tensor([0.9148, 0.0852]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.2708, 0.7292])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.7292)
+top5: [1, 0]
+top5conf: tensor([0.7292, 0.2708]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.8866, 0.1134])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.8866)
+top5: [0, 1]
+top5conf: tensor([0.8866, 0.1134]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.0274, 0.9726])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.9726)
+top5: [1, 0]
+top5conf: tensor([0.9726, 0.0274]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.0017, 0.9983])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.9983)
+top5: [1, 0]
+top5conf: tensor([0.9983, 0.0017]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.0012, 0.9988])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.9988)
+top5: [1, 0]
+top5conf: tensor([0.9988, 0.0012]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.0498, 0.9502])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.9502)
+top5: [1, 0]
+top5conf: tensor([0.9502, 0.0498]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([3.9929e-04, 9.9960e-01])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.9996)
+top5: [1, 0]
+top5conf: tensor([9.9960e-01, 3.9929e-04]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.0039, 0.9961])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.9961)
+top5: [1, 0]
+top5conf: tensor([0.9961, 0.0039]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.0013, 0.9987])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.9987)
+top5: [1, 0]
+top5conf: tensor([0.9987, 0.0013]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.0064, 0.9936])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.9936)
+top5: [1, 0]
+top5conf: tensor([0.9936, 0.0064]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.0024, 0.9976])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.9976)
+top5: [1, 0]
+top5conf: tensor([0.9976, 0.0024])]
+
+2024-04-08 16:20:33,222 - Timestamp: 2024-04-08 16:20:32.591748
+WindowProbs:[ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.9987, 0.0013])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.9987)
+top5: [0, 1]
+top5conf: tensor([0.9987, 0.0013]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.9423, 0.0577])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.9423)
+top5: [0, 1]
+top5conf: tensor([0.9423, 0.0577]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.9908, 0.0092])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.9908)
+top5: [0, 1]
+top5conf: tensor([0.9908, 0.0092]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.8810, 0.1190])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.8810)
+top5: [0, 1]
+top5conf: tensor([0.8810, 0.1190]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.7702, 0.2298])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.7702)
+top5: [0, 1]
+top5conf: tensor([0.7702, 0.2298]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.5553, 0.4447])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.5553)
+top5: [0, 1]
+top5conf: tensor([0.5553, 0.4447]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.0123, 0.9877])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.9877)
+top5: [1, 0]
+top5conf: tensor([0.9877, 0.0123]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.1597, 0.8403])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.8403)
+top5: [1, 0]
+top5conf: tensor([0.8403, 0.1597]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.1846, 0.8154])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.8154)
+top5: [1, 0]
+top5conf: tensor([0.8154, 0.1846]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.2267, 0.7733])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.7733)
+top5: [1, 0]
+top5conf: tensor([0.7733, 0.2267]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.1969, 0.8031])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.8031)
+top5: [1, 0]
+top5conf: tensor([0.8031, 0.1969]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.0167, 0.9833])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.9833)
+top5: [1, 0]
+top5conf: tensor([0.9833, 0.0167]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.1784, 0.8216])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.8216)
+top5: [1, 0]
+top5conf: tensor([0.8216, 0.1784]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.2608, 0.7392])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.7392)
+top5: [1, 0]
+top5conf: tensor([0.7392, 0.2608]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.6858, 0.3142])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.6858)
+top5: [0, 1]
+top5conf: tensor([0.6858, 0.3142]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.1636, 0.8364])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.8364)
+top5: [1, 0]
+top5conf: tensor([0.8364, 0.1636]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.2832, 0.7168])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.7168)
+top5: [1, 0]
+top5conf: tensor([0.7168, 0.2832]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.9106, 0.0894])
+orig_shape: None
+shape: torch.Size([2])
+top1: 0
+top1conf: tensor(0.9106)
+top5: [0, 1]
+top5conf: tensor([0.9106, 0.0894]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.2394, 0.7606])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.7606)
+top5: [1, 0]
+top5conf: tensor([0.7606, 0.2394]), ultralytics.engine.results.Probs object with attributes:
+
+data: tensor([0.1254, 0.8746])
+orig_shape: None
+shape: torch.Size([2])
+top1: 1
+top1conf: tensor(0.8746)
+top5: [1, 0]
+top5conf: tensor([0.8746, 0.1254])]
+

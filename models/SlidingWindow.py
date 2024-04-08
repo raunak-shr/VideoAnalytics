@@ -1,6 +1,7 @@
 import os
 import shutil
 import datetime
+import uuid
 from typing import List
 from ultralytics.engine.results import Results as Frame
 
@@ -29,24 +30,27 @@ class SlidingWindow:
         self.result_dir = SAVE_LOCATION
         self.ts = None
 
-    def capture_frame(self) -> None:
+    def capture_window(self) -> None:
         """
         Return a (new) directory path with the captured frames for saving the frames after processing the window
 
         Returns:
             Final results directory path
         """
+        self.ts = str(datetime.datetime.now())  # Set time at which sequence is captured
+        
+        # Make directory to save window
         folder = datetime.date.today().strftime("%d %B %Y")
-        self.ts = str(datetime.datetime.now())
         final_dir = os.path.join(self.result_dir, folder)
         if os.path.exists(final_dir):
             shutil.rmtree(final_dir)
         os.mkdir(final_dir)
-        for idx, frame in enumerate(self.window):
-            filename = f'{final_dir}/{self.ts} - Accident - {idx}.jpg'
-            frame.plot(save=True, filename=filename)
         self.result_dir = final_dir
 
+        for idx, frame in enumerate(self.window):
+            time = str(datetime.datetime.now().strftime("%H:%M:%S"))
+            frame.plot(save=True, filename=f'{final_dir}/{uuid.uuid4()}.jpg')
+        
     def add_element(self, frame: Frame):
         if len(self.window) == self.window_size:
             self.window.pop(0)
@@ -60,9 +64,10 @@ class SlidingWindow:
                     acc_frame_percent = float(events.count(1) / len(events))
                     if acc_frame_percent >= self.threshold:
                         self.flag = True
-                        self.capture_frame()
-                else:
-                    continue
+                    else:
+                        continue
+            if self.flag == True:
+                self.capture_window()
         else:
             self.flag = False
 
