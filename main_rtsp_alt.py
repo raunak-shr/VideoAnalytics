@@ -1,5 +1,4 @@
 # Change directory to this folder and run using python -m uvicorn main_rtsp:app --reload --port 8001
-import os
 import torch
 import logging
 import supervision as sv
