@@ -20,7 +20,7 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Logging Setup---------------------------------------------------------------------------------------------------------
 
-log: logger = logging.getLogger(__name__) # type: ignore
+log: logger = logging.getLogger(__name__)  # type: ignore
 log.setLevel(logging.INFO)
 log_file = 'app.log'
 file_handler = logging.FileHandler(log_file)

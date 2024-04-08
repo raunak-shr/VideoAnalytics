@@ -1,8 +1,10 @@
-from typing import Generator, List
 import os
+import uuid
 import shutil
-from ultralytics.engine.results import Results as Frame
 import datetime
+from typing import List
+from ultralytics.engine.results import Results as Frame
+
 SAVE_LOCATION = r"test-outputs"  # save the uploaded video and outputs (if any) this location
 
 
@@ -35,14 +37,14 @@ class SlidingWindow:
         Returns:
             Final results directory path
         """
-        timestamp = str(datetime.datetime.now())
-        self.ts = timestamp
-        final_dir = os.path.join(self.result_dir, timestamp)
+        folder = datetime.date.today().strftime("%d %B %Y")
+        self.ts = str(datetime.datetime.now())
+        final_dir = os.path.join(self.result_dir, folder)
         if os.path.exists(final_dir):
             shutil.rmtree(final_dir)
         os.mkdir(final_dir)
         for idx, frame in enumerate(self.window):
-            filename = f'{final_dir}/{timestamp} - Accident - {idx}.jpg'
+            filename = f'{final_dir}/{self.ts} - Accident - {idx}.jpg'
             frame.plot(save=True, filename=filename)
         self.result_dir = final_dir
 
