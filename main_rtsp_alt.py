@@ -1,22 +1,32 @@
 # Change directory to this folder and run using python -m uvicorn main_rtsp:app --reload --port 8001
 import os
 import torch
-import shutil
-import datetime
+import logging
 import supervision as sv
 from fastapi import FastAPI
 from typing import Generator
+from models.model import IpModel
 from ultralytics import YOLO
+from models.model import IpModel
+from fastapi.logger import logger
 from fastapi.exceptions import HTTPException
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
-from models.model import IpModel
 from models.SlidingWindow import SlidingWindow as SlidWin
 from ultralytics.engine.results import Results as Frame
 
 MODEL = YOLO(r'YOLOmodel/best3.pt')
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-# API_KEY = 'NgZkaQV5UzqGh8exm4d6'  # FROM ROBOFLOW
+
+# Logging Setup---------------------------------------------------------------------------------------------------------
+
+log: logger = logging.getLogger(__name__)
+log.setLevel(logging.INFO)
+log_file = 'app.log'
+file_handler = logging.FileHandler(log_file)
+formatter = logging.Formatter('%(asctime)s - %(message)s')
+file_handler.setFormatter(formatter)
+log.addHandler(file_handler)
 
 # FastAPI Setup---------------------------------------------------------------------------------------------------------
 
@@ -63,6 +73,9 @@ def upload_video_and_process(data: IpModel) -> dict:
             f: Frame = next(results)
             sliding_window.add_element(f)
             if sliding_window.is_flag_raised():
+                log.info(f"Timestamp: {sliding_window.ts}\n"
+                         f"WindowProbs:{[x.probs for x in sliding_window.window]}\n")
+
                 return {'Status': sliding_window.flag,
                         'OutputPath': sliding_window.result_dir,
                         'Timestamp': sliding_window.ts}  # 3. Return Results
