@@ -1,13 +1,14 @@
 # Change directory to this folder and run using python -m uvicorn main_rtsp_alt:app --reload --port 8001
+import json
 import torch
 import logging
+import datetime
 import supervision as sv
 from fastapi import FastAPI
 from typing import Generator
 from models.model import IpModel
 from ultralytics import YOLO
 from models.model import IpModel
-from fastapi.logger import logger
 from fastapi.exceptions import HTTPException
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -16,16 +17,7 @@ from ultralytics.engine.results import Results as Frame
 
 MODEL = YOLO(r'YOLOmodel/best3.pt')
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-# Logging Setup---------------------------------------------------------------------------------------------------------
-
-log: logger = logging.getLogger(__name__)  # type: ignore
-log.setLevel(logging.INFO)
-log_file = 'app.log'
-file_handler = logging.FileHandler(log_file)
-formatter = logging.Formatter('%(asctime)s - %(message)s')
-file_handler.setFormatter(formatter)
-log.addHandler(file_handler)
+SAVE_LOCATION = r"test-outputs"
 
 # FastAPI Setup---------------------------------------------------------------------------------------------------------
 
@@ -68,16 +60,25 @@ def upload_video_and_process(data: IpModel) -> dict:
         frames_per_sec = sv.VideoInfo.from_video_path(source).fps
         results: Generator = MODEL.predict(source, stream=True, save=False)
         sliding_window = SlidWin(window_size=20, threshold=data.threshold)
+        json_value = None
         while True:
             f: Frame = next(results)
             sliding_window.add_element(f)
             if sliding_window.is_flag_raised():
-                log.info(f"Timestamp: {sliding_window.ts}\n"
-                         f"WindowProbs:{[x.probs for x in sliding_window.window]}\n")
-
-                return {'Status': sliding_window.flag,
-                        'OutputPath': sliding_window.result_dir,
-                        'Timestamp': sliding_window.ts}  # 3. Return Results
+                
+                fold = datetime.date.today().strftime("%d %B %Y")
+                
+                json_path = f'{SAVE_LOCATION}\{fold}\Accident.json'
+                json_value = {"Timestamp": sliding_window.ts, 
+                              "Incident": "Accident", 
+                              "Probabilities": str([list(x.probs.data.numpy()) for x in sliding_window.window])}
+    
+        if json_value is not None:  # Can use threading to see if json_value is changed, also for window
+            with open(json_path, "w") as f:
+                json.dump(json_value, f)
+                # return {'Status': sliding_window.flag,
+                #         'OutputPath': sliding_window.result_dir,
+                #         'Timestamp': sliding_window.ts}  # 3. Return Results
 
     except Exception as e:
         raise HTTPException(status_code=500, detail="Failed to process video", headers={"X-Error": f"{e}"})
