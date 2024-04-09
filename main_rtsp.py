@@ -73,12 +73,12 @@ def upload_video_and_process(data: IpModel) -> dict:
                               "Incident": "Accident", 
                               "Probabilities": str([list(x.probs.data.numpy()) for x in sliding_window.window])}
     
-        if json_value is not None:  # Can use threading to see if json_value is changed, also for window
-            with open(json_path, "w") as f:
-                json.dump(json_value, f)
-                # return {'Status': sliding_window.flag,
-                #         'OutputPath': sliding_window.result_dir,
-                #         'Timestamp': sliding_window.ts}  # 3. Return Results
+                with open(json_path, "w") as f:
+                    json.dump(json_value, f)
+                sliding_window.flag = False
+                    # return {'Status': sliding_window.flag,
+                    #         'OutputPath': sliding_window.result_dir,
+                    #         'Timestamp': sliding_window.ts}  # 3. Return Results
 
     except Exception as e:
         raise HTTPException(status_code=500, detail="Failed to process video", headers={"X-Error": f"{e}"})

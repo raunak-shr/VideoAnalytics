@@ -7,26 +7,6 @@ from ultralytics.engine.results import Results as Frame
 
 SAVE_LOCATION = r"test-outputs"  # save the uploaded video and outputs (if any) this location
 
-def capture_window(slidwin: SlidingWindow) -> None:  # type: ignore
-    """
-    Return a (new) directory path with the captured frames for saving the frames after processing the window
-
-    Returns:
-        Final results directory path
-    """
-    slidwin.ts = str(datetime.datetime.now())  # Set time at which sequence is captured
-    
-    # Make directory to save window
-    folder = datetime.date.today().strftime("%d %B %Y")
-    final_dir = os.path.join(slidwin.result_dir, folder)
-    if os.path.exists(final_dir):
-        shutil.rmtree(final_dir)
-    os.mkdir(final_dir)
-    slidwin.result_dir = final_dir
-
-    for _, frame in enumerate(slidwin.window):
-        time = str(datetime.datetime.now().strftime("%H:%M:%S"))
-        frame.plot(save=True, filename=f'{final_dir}/{uuid.uuid4()}.jpg')
 
 class SlidingWindow:
     """
@@ -49,7 +29,25 @@ class SlidingWindow:
         self.flag = False
         self.result_dir = SAVE_LOCATION
         self.ts = None
+        folder = datetime.date.today().strftime("%d %B %Y")
+        final_dir = os.path.join(self.result_dir, folder)
+        if os.path.exists(final_dir):
+            shutil.rmtree(final_dir)
+        os.mkdir(final_dir)
+        self.result_dir = final_dir
+    
+    def capture_window(self) -> None:
+        """
+        Return a (new) directory path with the captured frames for saving the frames after processing the window
 
+        Returns:
+            Final results directory path
+        """
+        self.ts = str(datetime.datetime.now())  # Set time at which sequence is captured
+        
+        for _, frame in enumerate(self.window):
+            # time = str(datetime.datetime.now().strftime("%H:%M:%S"))
+            frame.plot(save=True, filename=f'{self.result_dir}/{uuid.uuid4()}.jpg')
         
     def add_element(self, frame: Frame):
         if len(self.window) == self.window_size:
@@ -64,10 +62,13 @@ class SlidingWindow:
                     acc_frame_percent = float(events.count(1) / len(events))
                     if acc_frame_percent >= self.threshold:
                         self.flag = True
+                        break
             if self.flag == True:
-                capture_window(self)
-        else:
-            self.flag = False
+                self.capture_window()
+                self.flag = False
+            else:
+                self.flag = False
+        
 
     def is_flag_raised(self) -> bool:
         return self.flag
