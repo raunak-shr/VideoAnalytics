@@ -38,10 +38,7 @@ class SlidingWindow:
     
     def capture_window(self) -> None:
         """
-        Return a (new) directory path with the captured frames for saving the frames after processing the window
-
-        Returns:
-            Final results directory path
+        Captures the window to SAVE_LOCATION
         """
         self.ts = str(datetime.datetime.now())  # Set time at which sequence is captured
         
