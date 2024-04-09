@@ -1,7 +1,6 @@
 # Change directory to this folder and run using python -m uvicorn main_rtsp_alt:app --reload --port 8001
 import json
 import torch
-import logging
 import datetime
 import supervision as sv
 from fastapi import FastAPI
