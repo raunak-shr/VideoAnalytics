@@ -1,3 +1,5 @@
+import os
+import shutil
 import json
 import uuid
 import datetime
@@ -15,6 +17,12 @@ class RollingDeque:
         self.result_dir = SAVE_LOCATION
         self.fse = 0  # frames_since_event
         self.ts = None  # Timestamp of detected incident
+        folder = datetime.date.today().strftime("%d %B %Y")
+        final_dir = os.path.join(self.result_dir, folder)
+        if os.path.exists(final_dir):
+            shutil.rmtree(final_dir)
+        os.mkdir(final_dir)
+        self.result_dir = final_dir
 
     def capture_frame(self) -> None:
         """
@@ -22,7 +30,7 @@ class RollingDeque:
         """
         self.ts = str(datetime.datetime.now())  # Set time at which sequence is captured
         
-        for _, frame in enumerate(self.window):
+        for _, frame in enumerate(self.prediction_queue):
             frame.plot(save=True, filename=f'{self.result_dir}/{uuid.uuid4()}.jpg')
     
     def dump_json(self) -> None:
@@ -40,7 +48,7 @@ class RollingDeque:
         with open(json_path, "w") as f:
             json.dump(json_value, f)
     
-    def add_element(self, wrapped, instance, frame: Frame):
+    def add_element(self, frame: Frame):
         self.prediction_queue.append(frame)
         if len(self.prediction_queue) == self.window_size:
             events = [x.probs.top1 for x in self.prediction_queue]
