@@ -51,15 +51,17 @@ class RollingDeque:
     def add_element(self, frame: Frame):
         self.prediction_queue.append(frame)
         if len(self.prediction_queue) == self.window_size:
-            events = [x.probs.top1 for x in self.prediction_queue]
-            acc_frame_percent = float(events.count(1) / len(events))
-            if acc_frame_percent>self.threshold and self.fse == 0:
-                print(f"\nEvent triggered! Prediction: {acc_frame_percent:.2f}")
+            # events = [x.probs for x in self.prediction_queue if x.probs.top1>0.9]
+           
+            events = [1 if x.probs.data[1]>self.threshold else 0 for x in self.prediction_queue]
+            acc_frame_count = events.count(1)
+            if acc_frame_count>10 and self.fse == 0:
+                print(f"\nEvent triggered! Prediction: {acc_frame_count/len(events):.2f}")
                 self.capture_frame()
                 self.dump_json()
                 self.fse = 1
             else:
-                print(f"\nPrediction: {acc_frame_percent:.2f}")
+                print(f"\nPrediction: {acc_frame_count/len(events):.2f}")
             if self.fse > 0:
                 self.fse += 1
             if self.fse == 10:
