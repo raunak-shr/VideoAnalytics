@@ -1,8 +1,9 @@
-from typing import Generator, List
 import os
+import uuid
 import shutil
-from ultralytics.engine.results import Results as Frame
 import datetime
+from typing import List
+from ultralytics.engine.results import Results as Frame
 SAVE_LOCATION = r"test-outputs"  # save the uploaded video and outputs (if any) this location
 
 
@@ -28,6 +29,12 @@ class RollingHash:
         self.result_dir = SAVE_LOCATION
         self.hash_value = 0
         self.ts = None
+        folder = datetime.date.today().strftime("%d %B %Y")
+        final_dir = os.path.join(self.result_dir, folder)
+        if os.path.exists(final_dir):
+            shutil.rmtree(final_dir)
+        os.mkdir(final_dir)
+        self.result_dir = final_dir
 
     def capture_frame(self) -> None:
         """
@@ -36,35 +43,31 @@ class RollingHash:
         Returns:
             Final results directory path
         """
-        timestamp = str(datetime.datetime.now())
-        self.ts = timestamp
-        final_dir = os.path.join(self.result_dir, timestamp)
-        if os.path.exists(final_dir):
-            shutil.rmtree(final_dir)
-        os.mkdir(final_dir)
-        for idx, frame in enumerate(self.window):
-            filename = f'{final_dir}/{timestamp} - Accident - {idx}.jpg'
-            frame.plot(save=True, filename=filename)
-        self.result_dir = final_dir
+        self.ts = str(datetime.datetime.now())  # Set time at which sequence is captured
+        
+        for _, frame in enumerate(self.window):
+            # time = str(datetime.datetime.now().strftime("%H:%M:%S"))
+            frame.plot(save=True, filename=f'{self.result_dir}/{uuid.uuid4()}.jpg')
 
-    def calculate_acc_percent(self):
-        # Count occurrences of 1 within the window using the hash
-        count_ones = sum(1 for bit in bin(self.hash_value)[2:] if bit == '1')
-        return float(count_ones / self.window_size)
-
+    
     def add_element(self, frame: Frame):
         if len(self.window) == self.window_size:
-            self.hash_value -= self.window[0].probs.top1  # Update hash on element removal
-            self.window.pop(0)
+            removed_frame = self.window.pop(0)
+            if removed_frame.probs.top1 == 1:
+                self.acc_frame_count -= 1
 
         self.window.append(frame)
-        self.hash_value += 1  # Update hash with new element
+        if frame.probs.top1 == 1:
+            self.acc_frame_count += 1
 
         if len(self.window) == self.window_size:
-            acc_frame_percent = self.calculate_acc_percent()
-            if acc_frame_percent >= self.threshold:
+            if self.acc_frame_count >= self.threshold * self.window_size:
                 self.flag = True
-                self.capture_frame()
+            else:
+                self.flag = False
+        else:
+            self.flag = False
+
 
     def is_flag_raised(self) -> bool:
         return self.flag
