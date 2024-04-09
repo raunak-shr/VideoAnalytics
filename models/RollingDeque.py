@@ -55,6 +55,8 @@ class RollingDeque:
             acc_frame_percent = float(events.count(1) / len(events))
             if acc_frame_percent>self.threshold and self.fse == 0:
                 print(f"\nEvent triggered! Prediction: {acc_frame_percent:.2f}")
+                self.capture_frame()
+                self.dump_json()
                 self.fse = 1
             else:
                 print(f"\nPrediction: {acc_frame_percent:.2f}")
@@ -62,8 +64,7 @@ class RollingDeque:
                 self.fse += 1
             if self.fse == 10:
                 self.fse = 0
-                self.capture_frame()
-                self.dump_json()
+                
 
         
 
