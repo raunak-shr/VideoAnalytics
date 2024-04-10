@@ -17,6 +17,7 @@ class RollingDeque:
         self.result_dir = SAVE_LOCATION
         self.fse = 0  # frames_since_event
         self.ts = None  # Timestamp of detected incident
+        self.triggers = 0  # No. of event triggers
         folder = datetime.date.today().strftime("%d %B %Y")
         final_dir = os.path.join(self.result_dir, folder)
         if os.path.exists(final_dir):
@@ -33,7 +34,7 @@ class RollingDeque:
         for _, frame in enumerate(self.prediction_queue):
             frame.plot(save=True, filename=f'{self.result_dir}/{uuid.uuid4()}.jpg')
     
-    def dump_json(self) -> None:
+    def dump_json(self, no_of_events: int) -> None:
         """
         Dump jsons containing event information to SAVE_LOCATION
         """
@@ -42,7 +43,8 @@ class RollingDeque:
                 
         json_path = f'{SAVE_LOCATION}\{fold}\Accident.json'
         json_value = {"Timestamp": self.ts, 
-                        "Incident": "Accident", 
+                        "Incident": "Accident",
+                        "No. of triggers": no_of_events, 
                         "Probabilities": str([list(x.probs.data.numpy()) for x in self.prediction_queue])}
 
         with open(json_path, "w") as f:
@@ -51,14 +53,14 @@ class RollingDeque:
     def add_element(self, frame: Frame):
         self.prediction_queue.append(frame)
         if len(self.prediction_queue) == self.window_size:
-            # events = [x.probs for x in self.prediction_queue if x.probs.top1>0.9]
            
             events = [1 if x.probs.data[1]>self.threshold else 0 for x in self.prediction_queue]
             acc_frame_count = events.count(1)
-            if acc_frame_count>10 and self.fse == 0:
+            if acc_frame_count>18 and self.fse == 0:
                 print(f"\nEvent triggered! Prediction: {acc_frame_count/len(events):.2f}")
+                self.triggers+=1
                 self.capture_frame()
-                self.dump_json()
+                self.dump_json(self.triggers)
                 self.fse = 1
             else:
                 print(f"\nPrediction: {acc_frame_count/len(events):.2f}")

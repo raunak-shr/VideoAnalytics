@@ -1,8 +1,5 @@
 # Change directory to this folder and run using python -m uvicorn main_deque:app --reload --port 8001
-import json
 import torch
-import datetime
-import supervision as sv
 from fastapi import FastAPI
 from typing import Generator
 from models.model import IpModel
