@@ -53,7 +53,7 @@ def upload_video_and_process(data: IpModel) -> None:
     """
     try:
         source = data.file
-        rolling_deque = RollingDeque(window_size = 20, threshold = data.threshold)
+        rolling_deque = RollingDeque(window_size = 25, threshold = data.threshold)
         results: Generator = MODEL.predict(source, stream=True, save=False)
         while True:
             f: Frame = next(results)

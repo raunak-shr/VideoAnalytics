@@ -9,5 +9,7 @@
 /dataSources.local.xml
 venv/
 __pycache__/
+models/__pycache__/
 test-outputs/
 test.ipynb
+

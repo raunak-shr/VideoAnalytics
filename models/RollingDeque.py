@@ -56,7 +56,7 @@ class RollingDeque:
            
             events = [1 if x.probs.data[1]>self.threshold else 0 for x in self.prediction_queue]
             acc_frame_count = events.count(1)
-            if acc_frame_count>18 and self.fse == 0:
+            if acc_frame_count>(self.window_size-2) and self.fse == 0:
                 print(f"\nEvent triggered! Prediction: {acc_frame_count/len(events):.2f}")
                 self.triggers+=1
                 self.capture_frame()
