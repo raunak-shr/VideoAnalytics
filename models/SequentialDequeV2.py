@@ -34,15 +34,15 @@ class SequentialDeque:
         final_dir = os.path.join(self.result_dir, folder)
         if os.path.exists(final_dir):
             shutil.rmtree(final_dir)
-        os.mkdir(final_dir)
-        self.result_dir = final_dir
+        # os.mkdir(final_dir)
+        # self.result_dir = final_dir
 
     def capture_frame(self) -> None:
         """
         Captures the window frames to SAVE_LOCATION and append spike timstamps to the result json
         """
         folder = datetime.date.today().strftime("%d %B %Y")  # Create a folder with name of today's date
-        final_dir = os.path.join(SAVE_LOCATION, folder)
+        final_dir = os.path.join(self.result_dir, folder)
     
         if not os.path.exists(final_dir):
             # shutil.rmtree(final_dir)
@@ -62,7 +62,7 @@ class SequentialDeque:
         """
         
         fold = datetime.date.today().strftime("%d %B %Y")  # Create a folder with name as event's date
-        final_dir = os.path.join(SAVE_LOCATION, fold)
+        final_dir = os.path.join(self.result_dir, fold)
         if not os.path.exists(final_dir):
             os.mkdir(final_dir)
         

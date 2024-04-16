@@ -53,7 +53,7 @@ def upload_video_and_process(data: IpModel) -> None:
     """
     try:
         source = data.file
-        seque = SequentialDeque(window_size = 25, threshold = data.threshold, order = 3)
+        seque = SequentialDeque(window_size = 25, threshold = data.threshold, order = 7)
         results: Generator = MODEL.predict(source, stream=True, save=False)
         while True:
             f: Frame = next(results)
