@@ -41,6 +41,7 @@ class SequentialDeque:
         """
         Captures the window frames to SAVE_LOCATION and append spike timstamps to the result json
         """
+        frozen_frames = self.prediction_queue
         folder = datetime.date.today().strftime("%d %B %Y")  # Create a folder with name of today's date
         final_dir = os.path.join(SAVE_LOCATION, folder)
     
@@ -51,8 +52,9 @@ class SequentialDeque:
         self.result_dir = final_dir
         self.ts.append(datetime.datetime.now())  # Set time at which sequence is captured
         self.acc_ts = self.ts[-1]  # can make it a list append to store multiple accidnets in a day
-        for _, frame in enumerate(self.prediction_queue):
-            frame.plot(save=True, filename=f'{self.result_dir}/{uuid.uuid4()}.jpg')
+        
+        for _, frame in enumerate(frozen_frames):
+            frame.plot(save=True, filename=f'{self.result_dir}/{self.ts[-1]}.jpg')
     
     def dump_json(self, spike_count: int) -> None:
         """
@@ -87,8 +89,8 @@ class SequentialDeque:
         if len(self.ts)>=self.order:
             time2 = self.ts[-1]             # Say order = 4, ts_array = [ts1, ts2, ts3, ..., ts9, ts10, ts11, ts12]. 
             time1 = self.ts[-self.order]    # In case accident happend ts9 to ts 12 must've been under a 
-            time_diff = time2 - time1       # short span of 3 second therefore ts12 - ts9 <3
-            if time_diff.total_seconds() < 3:
+            time_diff = time2 - time1       # short span of (self.order/25) seconds therefore ts12 - ts9 < (self.order/25)
+            if time_diff.total_seconds() < int(self.order/25):  # since 25 fps feed
                 self.capture_frame()
                 self.acc_count+=1
                 print("\n====================!! Accident Detected !!====================")
@@ -100,7 +102,7 @@ class SequentialDeque:
            
             events = [1 if x.probs.data[1]>self.threshold else 0 for x in self.prediction_queue]
             acc_frame_count = events.count(1)
-            if acc_frame_count>(self.window_size-2) and self.fse == 0:  # self.window_size - 2 = order
+            if acc_frame_count>(self.window_size-2) and self.fse == 0:  # self.window_size-2 = border (24,25)
                 print(f"\nSpike detected! Prediction: {acc_frame_count/len(events):.2f}\n")
                 self.ts.append(datetime.datetime.now())
                 self.spikes+=1
@@ -113,9 +115,3 @@ class SequentialDeque:
                 self.fse += 1
             if self.fse == 10:
                 self.fse = 0
-    
-                
-
-        
-
-

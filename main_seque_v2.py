@@ -1,4 +1,4 @@
-# Change directory to this folder and run using python -m uvicorn main_seque:app --reload --port 8001
+# Change directory to this folder and run using python -m uvicorn main_seque_v2:app --reload --port 8001
 import torch
 from fastapi import FastAPI
 from typing import Generator
@@ -8,7 +8,7 @@ from models.model import IpModel
 from fastapi.exceptions import HTTPException
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
-from models.SequentialDeque import SequentialDeque
+from models.SequentialDequeV2 import SequentialDequeV2
 from ultralytics.engine.results import Results as Frame
 
 MODEL = YOLO(r'YOLOmodel/best3.pt')
@@ -19,7 +19,7 @@ SAVE_LOCATION = r"test-outputs"
 
 app = FastAPI(
     title="Video Analytics",
-    description="""Detect for accidents in uploaded video (bytes format)
+    description="""Detect for accidents in streams
                     and return json results""",
     version="2023.1.31",
 )
@@ -53,7 +53,7 @@ def upload_video_and_process(data: IpModel) -> None:
     """
     try:
         source = data.file
-        seque = SequentialDeque(window_size = 25, threshold = data.threshold, order = 50)  # check for atleast 2 seconds / 50 frames 
+        seque = SequentialDequeV2(window_size = 25, threshold = data.threshold, order = 50)
         results: Generator = MODEL.predict(source, stream=True, save=False)
         while True:
             f: Frame = next(results)

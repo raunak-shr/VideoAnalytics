@@ -4,9 +4,12 @@ import json
 import uuid
 import datetime
 from typing import Deque, Dict, List
+from PIL import Image
 from collections import deque
+from ultralytics import YOLO
 from ultralytics.engine.results import Results as Frame
 SAVE_LOCATION = r"test-outputs"  # save the uploaded video and outputs (if any) to this location
+MODEL_X = YOLO(r'YOLOmodel/bestX.pt')
 
 
 class SequentialDeque:
@@ -78,7 +81,20 @@ class SequentialDeque:
             json.dump(self.json_value, f)
             f.write('\n')
     
-   
+    def final_test(self):
+        image_list = [Image.fromarray(x.orig_img) for x in self.prediction_queue]
+        conf_list = []
+        for img in image_list:
+            res = MODEL_X.predict(img, save = False)
+            try:
+                conf_list.append(res.boxes.conf.numpy()[0])  # if there's a bounding box detection, append its confidence
+            except:
+                conf_list.append(0.0)  # else append 0.0
+        if (len(conf_list) - conf_list.count(0))>self.window_size-2:  # if >23/25 frames have bounding boxes
+            self.capture_frame()
+            self.acc_count+=1
+            print("\n====================!! Accident Detected !!====================")
+    
     def notify(self):
         """
         Notify to the client as per logic in class definition. If the last 'order' no. of windows have a time difference of 
@@ -87,11 +103,12 @@ class SequentialDeque:
         if len(self.ts)>=self.order:
             time2 = self.ts[-1]             # Say order = 4, ts_array = [ts1, ts2, ts3, ..., ts9, ts10, ts11, ts12]. 
             time1 = self.ts[-self.order]    # In case accident happend ts9 to ts 12 must've been under a 
-            time_diff = time2 - time1       # short span of 3 second therefore ts12 - ts9 <3
-            if time_diff.total_seconds() < 3:
-                self.capture_frame()
-                self.acc_count+=1
-                print("\n====================!! Accident Detected !!====================")
+            time_diff = time2 - time1       # short span of (self.order/25) seconds therefore ts12 - ts9 < (self.order/25)
+            if time_diff.total_seconds() < int(self.order/25):
+                # self.capture_frame()
+                self.final_test()
+                # self.acc_count+=1
+                # print("\n====================!! Accident Detected !!====================")
                 
     
     def add_element(self, frame: Frame):
@@ -100,7 +117,7 @@ class SequentialDeque:
            
             events = [1 if x.probs.data[1]>self.threshold else 0 for x in self.prediction_queue]
             acc_frame_count = events.count(1)
-            if acc_frame_count>(self.window_size-2) and self.fse == 0:  # self.window_size - 2 = order
+            if acc_frame_count>(self.window_size-2) and self.fse == 0:  # self.window_size - 2 = border (24,25)
                 print(f"\nSpike detected! Prediction: {acc_frame_count/len(events):.2f}\n")
                 self.ts.append(datetime.datetime.now())
                 self.spikes+=1
