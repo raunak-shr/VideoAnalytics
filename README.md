@@ -7,7 +7,7 @@ and videos swiftly and accurately.
 ## Overview
 
 This project leverages Python along with the YOLO algorithm to analyze videos, detect objects within them, 
-and perform various analytics tasks. It provides functionalities such as Accident (implemented), Fire and Violence 
+and perform various analytics tasks. It provides functionalities such as Accident (implemented)
 detection within video streams and saves the frames to a database (locally in the backend server as of now).
 
 ## Requirements
