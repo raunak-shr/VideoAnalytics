@@ -86,11 +86,12 @@ class SequentialDeque:
         Notify to the client as per logic in class definition. If the last 'order' no. of windows have a time difference of 
         less than 1 seconds (25 frames (25fps stream)) then, notify.
         """
+        limit = (self.order/25 + 1) if (int(self.order/25)!=0) else 3
         if len(self.ts)>=self.order:
             time2 = self.ts[-1]             # Say order = 4, ts_array = [ts1, ts2, ts3, ..., ts9, ts10, ts11, ts12]. 
             time1 = self.ts[-self.order]    # In case accident happend ts9 to ts 12 must've been under a 
-            time_diff = time2 - time1       # short span of (self.order/25) seconds therefore ts12 - ts9 < (self.order/25)
-            if time_diff.total_seconds() < int(self.order/25):  # since 25 fps feed
+            time_diff = time2 - time1       # short span of (self.order/25 + 1) seconds therefore ts12 - ts9 < (self.order/25)
+            if time_diff.total_seconds() < limit:  # since 25 fps feed
                 self.capture_frame()
                 self.acc_count+=1
                 print("\n====================!! Accident Detected !!====================")
